@@ -1,0 +1,172 @@
+{% extends 'basic.html' %}
+{% block content %}
+
+<div class="container mt-4 mb-md-0 mb-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" style="border-radius: 15px; background-color: #93e2bb;">
+        <div class="card-body p-4 text-black">
+          <div>
+            <h6 class="mb-4">Your Profile</h6>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <p class="small mb-0">Bookings</p>
+              
+              <p class="fw-bold mb-0"><i class="fas fa-hand-holding-usd me-2"></i>{{credit}}</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="flex-shrink-0">
+              <img src="/media/{{request.user.myuser.photo}}"
+                alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                style="width: 70px;">
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <div class="d-flex flex-row align-items-center mb-2">
+                <p class="mb-0 me-2">{{request.user.username}}</p>
+                <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                  <li>
+                    <i class="fas fa-star fa-xs"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star fa-xs"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star fa-xs"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star fa-xs"></i>
+                  </li>
+                  <li>
+                    <i class="fas fa-star fa-xs"></i>
+                  </li>
+                </ul>
+              </div>
+              <div>
+               
+                <a href="{% url 'logoutuser' %}" type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                  data-mdb-ripple-color="dark">Logout</a>
+                  <button  type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                  data-mdb-ripple-color="dark" data-mdb-toggle="modal" data-mdb-target="#exampl">reset Password</button>    
+    
+                  
+                  
+                                            </div>
+            </div>
+          </div>
+          <hr>
+          
+          <a href="/" type="button" class="btn btn-success btn-rounded btn-block btn-lg"><i
+              class="far fa-clock me-2"></i>Book Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 mt-md-0 mt-3">
+        <div class="card shadow-0 border p-2">
+
+       
+{% if objects %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Table ID</th>
+        <th scope="col">Restaurant</th>
+        <th scope="col">Date Time</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        
+        {% for obj in objects %}
+        <tr>
+            <th scope="row">{{obj.table.id}}</th>
+            <td>{{obj.restaurant}}</td>
+            <td>{{obj.timestamp}}</td>
+            
+            
+          </tr>
+          {% endfor %}
+      
+      
+      
+    </tbody>
+  </table>
+{% else %}
+<div class="text-center py-5">
+  <h1>No Bookings Yet!.</h1>
+  <a href="/" class="btn btn-primary btn-sm mt-2">Book Now</a>
+</div> 
+  {% endif %}
+</div>   
+    </div>
+  </div>
+
+
+
+<div class="modal top fade" id="exampl" tabindex="-1" aria-labelledby="exampl"
+     aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+    <div class="modal-dialog" style="width: 300px;">
+        <div class="modal-content text-center">
+            <div class="modal-header h5 text-white bg-success justify-content-center">
+                Password Reset
+            </div>
+            <div class="modal-body px-5">
+                <p class="py-2">
+                    Enter 8 Digit strong password.Must include Numbers letters and punctuations.
+                </p>
+                <form action="/resetpassword">
+                    <input type="text" id="type" class="form-control my-3" name="password" placeholder="Enter New Password"/>
+                    
+                
+                <button type="submit" class="btn btnexp w-100">Reset password</button>
+              </form>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card shadow-0 border p-md-4 p-2 mt-2">
+        <h4>
+            Orders History
+        </h4>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Food Item</th>
+                <th scope="col">Bill</th>
+                <th scope="col">Date Time</th>
+                <th scope="col">Status</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                
+                {% for ord in orders %}
+                <tr>
+                    <th scope="row">{{ord.item}}</th>
+                    <td>{{ord.bill}}</td>
+                    <td>{{ord.timestamp}}</td>
+                    {% if ord.order_status == True %}
+                    
+                    <td><i class="fas fa-check text-success"></i></td>
+                    {% else %}
+                    <td><i class="fas fa-circle-xmark text-danger"></i></td>
+                    
+                    {% endif %}
+                    
+                  </tr>
+                  {% endfor %}
+              
+              
+              
+            </tbody>
+          </table>
+
+    </div>
+</div>
+
+
+
+</div>
+{% endblock content %}

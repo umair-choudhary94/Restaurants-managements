@@ -1,0 +1,40 @@
+{% extends "basic.html" %}
+{% block content %}
+<div class="container">
+    <div class="card shadow-0 border p-md-4 p-2 mt-2">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Table ID</th>
+                <th scope="col">Number of Seats</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% if tables %}
+                {% for t in tables %}
+                <tr>
+                    <th scope="row">{{t.id}}</th>
+                    <td>{{t.seats}}</td>
+                    {% if t.booking_status == False %}
+                    <td>Avaible <i class="fas fa-check text-success"></i></td>
+                    <td><a href="/booknow/{{rest.id}}/{{t.id}}/" class="btn btn-sm btn-success">Book Now</a></td>
+                    {% else %}
+                    <td>Booked <i class="fas fa-circle-xmark text-danger"></i></td>
+                    <td>wait for it</td>
+                    {% endif %}
+                    
+                    
+                  </tr>
+                  {% endfor %}
+                {% else %}
+                No data found!
+                {% endif %}
+              
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock content %}

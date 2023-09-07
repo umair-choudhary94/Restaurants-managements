@@ -1,0 +1,33 @@
+{% if items %}
+
+<div class="row mt-4">
+    {% for item in items %}
+    
+    <div class="col-md-3 mt-2">
+        {% comment %} <a href="/{{item.tname}}"> {% endcomment %}
+            <div class="card shadow-0 border mt-2">
+            {% comment %} {{item.photo}} {% endcomment %}
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <img src="/media/{{item.photo}}" class="img-fluid"/>
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">{{item.title}}</h4>
+                  <p class="card-text" style="font-size:13px;"><i class="fas fa-money-bill"></i> price: {{item.price}}<p>
+                  <a href="/orderfood/{{item.id}}/" class="btn btn-secondary">Order Now</a>
+                </div>
+              </div>
+    {% comment %} </a> {% endcomment %}
+    </div>
+
+    {% endfor %}
+    
+</div>
+
+{% else %}
+<div class="text-center mt-3">
+    Nothing To Show!
+</div>
+{% endif %}

@@ -1,0 +1,160 @@
+{% extends "basic.html" %}
+{% block title %}Restaurants{% endblock title %}
+{% block css %}
+.main-section{
+    height:60vh;
+    background: rgb(114,2,199);
+    background: linear-gradient(180deg, rgba(114,2,199,1) 23%, rgba(157,69,223,1) 70%);
+    {% comment %} border: 2px solid red; {% endcomment %}
+}
+.search{
+    width:70%;
+    background-color : white;
+    
+    {% comment %} border:2px solid green; {% endcomment %}
+    margin:auto;
+    margin-top:40px;
+    height:50px;
+    padding:10px;
+    {% comment %} border-bottom:2px solid #7202c7; {% endcomment %}
+}
+.search:hover{
+    border:1px solid #7202c7; 
+}
+.srch{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:15px;
+    margin-top:3px;
+}
+.bd{
+    border-bottom:3px solid #7202c7;
+}
+.toolmenu{
+    background-color:transparent;
+    padding: 7px;
+    margin-top:30px;
+    width:17vw;
+    border-radius:19px;
+}
+.toolmenu ul{
+    list-decoration:none;
+}
+.toolmenu a{
+    padding:4px;
+    
+}
+.toolmenu a:hover{
+    color:#7202c7;
+    border-bottom:2px solid #7202c7;
+}
+.s-icon{
+    margin-top:7px;
+}
+.toptext{
+    margin-top:35px;
+    font-size:50px;
+
+}
+@media screen and (max-width: 780px) {
+    .search{
+        width:100%;
+        margin-top:25px;
+        padding:7px;
+    }
+    .toolmenu{
+        width:60vw;
+    }
+    .toptext{
+        font-size:40px;
+        margin-top:10px;
+    }
+}
+{% endblock css %}
+{% block content %}
+
+    <div class="main-section text-center p-4 ">
+        <h1 class="text-white toptext">Search <span>For </span> Restaurants</h1>
+        <p class="text-white">Good Food Is Foundation Of Genius Souls!</p>
+        <div class="search shadow-3  card">
+            <div class="row">
+                <div class="col-3 mt-1">
+                    <i class="fas fa-location-crosshairs d-md-inline-block d-none"></i>
+                    <select class="" aria-label="Default select example" style="border:none;outline:none;" name="search" hx-get="/search" hx-trigger="click" hx-target="#result">
+                        <option selected value="">Location</option>
+                        {% for re in rests %}
+                        <option value="{{re.location}}">{{re.location}}</option>
+                        {% endfor %}
+                        
+                      </select>
+                </div>
+                <div class="col-4 mt-1">
+                    <i class="fas fa-bars-staggered d-md-inline-block d-none"></i>
+                    <select class="" aria-label="Default select example" style="border:none;outline:none;" name="search" hx-get="/catsearch" hx-trigger="click" hx-target="#result">
+                        <option selected>Category</option>
+                        {% for cat in cats %}
+                        <option value="{{cat.id}}">{{cat}}</option>
+                        {% endfor %}
+                        
+                      </select>
+                </div>
+                
+                
+                <div class="col-md-4 col-5">
+                    <input type="text" class="d-inline-block srch" placeholder="Search for Restaurants Name Here" hx-get="/search" hx-trigger="keyup" hx-target="#result" name="search" id="inputBox">
+                    
+                </div>
+                <div class="col-1 d-md-inline-block d-none">
+                    <i class="fas fa-magnifying-glass s-icon p-color"></i>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+            
+
+        </div>
+
+        <div class="text-center mt-2">
+            <div id="output" class="text-white"></div>
+        </div>
+        
+        {% comment %} <div class="toolmenu mx-auto">
+            <a href="#" class="text-dark" >All Tools</a>
+            <a href="#" class="text-dark">Text</a>
+            <a href="#" class="text-dark">Number</a> 
+            
+                
+        </div> {% endcomment %}
+    </div>
+    {% comment %} <hr> {% endcomment %}
+    <div class="container">
+        <div id="result">
+            {% include "result.html" %}
+        </div>
+   
+</div>
+<script>
+    const inputBox = document.getElementById("inputBox");
+const output = document.getElementById("output");
+let timer;
+
+inputBox.addEventListener("input", function() {
+  clearTimeout(timer);
+  output.innerText = `You are Searching: ${inputBox.value}`;
+  timer = setTimeout(function() {
+    output.innerText = "";
+  }, 2000);
+});
+
+</script>
+
+{% endblock content %}

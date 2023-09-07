@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% comment %} {% load static %} {% endcomment %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
+    <meta name="description" content="{% block description %}{% endblock description %}" />
+    <meta name="author" content="{% block author %}{% endblock author %}" />
+    <meta name="google-site-verification" content="zOmDA2Jki48XRx7Omwlojd-_LwDFWLVF8SMRV1SCoGU" />
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" /> {% endcomment %}
+    <title>{% block title %}{% endblock title %}</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+    <style>
+        .btn-primary{
+            background-color:#7202c7;
+            shadow:none;
+            
+        }
+        .btn-secondary{
+          background-color:#8ab5f5;
+          color:black;
+        }
+        .btn-primary:hover{
+            background-color:white;
+            color:black;
+            border-bottom:1px solid #7202c7;
+        }
+        body{
+            background-color:#f5f4f4;
+        }
+        .navbar{
+            background-color:white;
+        }
+        .p-color{
+          color: #7202c7;
+      }
+        
+        .logo{
+          color: #840fdf;
+        }
+        
+        {% block css %}{% endblock css %}
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-4" href="/">
+        {% comment %} <img
+          src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+          height="16"
+          alt="MDB Logo"
+          loading="lazy"
+          style="margin-top: -1px;"
+        /> {% endcomment %}
+     
+    <h3><span style="font-size:25px;">Company</span><span class="logo">Name</span></h3>
+      </a>
+  
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Privacy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Disclaimer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Terms and Condition</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+  
+        {% comment %} <div class="d-flex align-items-center">
+          <button type="button" class="btn btn-link px-3 me-2">
+            Login
+          </button>
+          <button type="button" class="btn btn-primary me-3">
+            Sign up for free
+          </button>
+          <a
+            class="btn btn-dark px-3"
+            href="https://github.com/mdbootstrap/mdb-ui-kit"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+        </div> {% endcomment %}
+        <div class="dropdown">
+            <a class="dropdown-toggle" type="" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
+            Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a href="/viewprofile" class="dropdown-item" type="button">Your Profile</a></li>
+              <li><a href="/register" class="dropdown-item" type="button">Register | Login</a></li>
+              <li><a href="/logout" class="dropdown-item" type="button">Logout</a></li>
+              
+              
+            </ul>
+          </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+    {% block content %}{% endblock content %}
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+      <!-- Grid container -->
+      
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-dark" href="/">Company Name</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+    ></script>
+    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
+</body>
+</html>
